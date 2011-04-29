@@ -24,7 +24,7 @@ def warmupRNG():
 def generateFromStruct(structname, stringSets, multiprob):
 	generators = map(lambda line: StructuredGenerator(line, stringSets, multiprob), stringSets[structname])	
 	
-	print random.choice(generators).generateString()
+	return random.choice(generators).generateString()
 	
 def getStringSets(filenames, ext):
 	stringSetNames = FileHandling.getFileNamesWithExt("txt", filenames)
@@ -40,11 +40,12 @@ if __name__=="__main__":
 	opts = CLOpts(sys.argv[1:])
 
 	multipleProb = float(opts[opts.multiProbOpt])
+	dStructName = os.path.splitext(opts[opts.drinkStructOpt])[0]
+	nStructName = os.path.splitext(opts[opts.nameStructOpt])[0]
 	ext = "txt"
 
 	filesInDir = glob.glob("*." + ext)
 	stringSets = getStringSets(filesInDir, ext)	
 
-	generateFromStruct("namestruct", stringSets, multipleProb)
-	generateFromStruct("drinkstruct", stringSets, multipleProb)
-
+	print generateFromStruct(nStructName, stringSets, multipleProb)
+	print generateFromStruct(dStructName, stringSets, multipleProb)
