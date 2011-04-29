@@ -1,4 +1,0 @@
-<spirit> <mixer>
-<spirit> <spirit> <mixer>
-<spirit> <mixer> <mixer>
-<spirit> <spirit> <mixer> <mixer>
