@@ -6,29 +6,6 @@ import sys
 
 """
 	Clockfails
-
-	Examples:
-	Prince Edward's flaming splean
-	The ruptured bladder of King Terrence
-	The Prince Regent's mistifying utterance
-
-	specify structure in files?
-	e.g.
-	The <name>'s <intransitive verb>* <adjective> <noun>    
-	The <adjective> <noun> of <name>
-	<name>'s <adjective> <noun>
-	
-	so we need a structure name, verb, adject and noun file. 
-
-	4:
-	random selection of generator
-	5:
-	generation of clocktail name. 
-
-	6:
-	read mixers and spirits
-	7:
-	generation of clocktail ingredients	
 """
 
 
@@ -36,12 +13,23 @@ import FileHandling
 import random
 import uuid
 import struct
+import glob
 
 def warmupRNG():
 	sum = 0.0
 	for i in range(0,10000):
 		sum += random.random()
 	return sum
+
+def generateFromStruct(structname, stringSets, multiprob):
+	generators = map(lambda line: StructuredGenerator(line, stringSets, multiprob), stringSets[structname])	
+	
+	print random.choice(generators).generateString()
+	
+def getStringSets(filenames, ext):
+	stringSetNames = FileHandling.getFileNamesWithExt("txt", filenames)
+	stringSets = dict(zip(map(lambda (name,_): name, stringSetNames), map(lambda (name,ext): FileHandling.getLinesFromFile(name + ext), stringSetNames)))
+	return stringSets
 
 if __name__=="__main__":
 	aseed = struct.unpack("<I", os.urandom(4))
@@ -51,15 +39,12 @@ if __name__=="__main__":
 
 	opts = CLOpts(sys.argv[1:])
 
-	multipleProb = 0.2
-	stringSetNames = ["noun", "verb", "adj", "title", "name", "namestruct"]
-	stringSets = dict(zip(stringSetNames, map(lambda x: FileHandling.getLinesFromFile(opts[x]), stringSetNames)))	
-	generators = map(lambda line: StructuredGenerator(line, stringSets, multipleProb), stringSets["namestruct"])	
-	
-	print random.choice(generators).generateString()
+	multipleProb = float(opts[opts.multiProbOpt])
+	ext = "txt"
 
-	stringSetNames = ["drinkstruct", "spirit", "mixer"] 	
-	stringSets = dict(zip(stringSetNames, map(lambda x: FileHandling.getLinesFromFile(opts[x]), stringSetNames)))
-	generators = map(lambda line: StructuredGenerator(line, stringSets, multipleProb), stringSets["drinkstruct"])
+	filesInDir = glob.glob("*." + ext)
+	stringSets = getStringSets(filesInDir, ext)	
 
-	print random.choice(generators).generateString()
+	generateFromStruct("namestruct", stringSets, multipleProb)
+	generateFromStruct("drinkstruct", stringSets, multipleProb)
+

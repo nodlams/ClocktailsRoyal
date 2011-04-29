@@ -7,7 +7,8 @@ class GeneratorElement:
 		if self.timesToRepeat == -1:
 			self.timesToRepeat = 1
 			while True:
-				if random.random() < multipleProb:
+				r = random.random()
+				if r < multipleProb:
 					self.timesToRepeat += 1
 				else:
 					break

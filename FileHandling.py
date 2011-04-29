@@ -1,3 +1,6 @@
+import glob
+import os
+
 def discardCrap(line):
 	return line.replace("\n", "").strip()
 
@@ -10,3 +13,6 @@ def getLinesFromFile(filename):
 		lines.append(discardCrap(line))
 
 	return lines
+
+def getFileNamesWithExt(ext, filelist):
+	return map(lambda x: os.path.splitext(x), filelist)		

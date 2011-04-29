@@ -1,0 +1,15 @@
+King
+Prince
+Duke
+Earl
+Baron
+Princess
+Queen
+Viscount
+Countess
+Duchess
+Prince
+Lord
+Lady
+Marquess
+Sir
