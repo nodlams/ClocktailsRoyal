@@ -1,0 +1,11 @@
+<title> <name>'s <verb>* <adj>* <noun>
+<title> <name>'s <verb> of the <noun>
+<title> <name>'s <adj>* <noun>
+<title> <name>'s <adj> <adj> <noun>
+The <adj> <noun> of <title> <name>
+The <verb> of <title> <name>
+For <title> and <noun>
+The <title> is dead, long live the <noun>
+The <title>'s <noun>
+God save the <adj>* <title>
+The <adj> <title> 

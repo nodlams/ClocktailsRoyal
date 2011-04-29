@@ -1,0 +1,2 @@
+def randElement(elements):
+	
